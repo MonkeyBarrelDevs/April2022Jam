@@ -50,6 +50,11 @@ public class LevelLoader : MonoBehaviour
         StartCoroutine(Delay(sceneName, delay));
     }
 
+    public void ReloadScene() 
+    {
+        StartCoroutine(LoadLevel(getSceneName()));
+    }
+
     public void ExitGame()
     {
         Application.Quit();

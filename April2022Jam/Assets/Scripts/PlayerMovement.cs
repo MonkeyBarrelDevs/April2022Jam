@@ -4,18 +4,21 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [SerializeField] Animator anim;
+    [SerializeField] float deathDuration = 1f;
+
     [SerializeField] GameObject playerModel;
     [SerializeField] float moveSpeed = 5f;
     
     [SerializeField] float jumpForce = 5f;
-    [SerializeField] float gravityScale = 1f;
     [SerializeField] float jumpTimer = 0.5f;
 
     [SerializeField] LayerMask groundLayer;
     [SerializeField] Transform groundCheckTransform;
     [SerializeField] float groundCheckRadius = .4f;
 
-    float moveDirection = 0f;
+    float moveDirection;
+    float gravityScale;
 
     bool pressedJump = false;
     bool releasedJump = false;
@@ -26,11 +29,13 @@ public class PlayerMovement : MonoBehaviour
     bool isGrounded = false; 
 
     Rigidbody2D rb;
+    Collider2D playerCollider;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        rb.gravityScale = gravityScale;
+        gravityScale = rb.gravityScale;
+        playerCollider = GetComponent<Collider2D>(); 
 
         timer = jumpTimer;
     }
@@ -105,5 +110,18 @@ public class PlayerMovement : MonoBehaviour
     {
         Collider2D[] colliders = Physics2D.OverlapCircleAll(groundCheckTransform.position, groundCheckRadius, groundLayer);
         isGrounded = colliders.Length > 0;
+    }
+
+    public void Die() 
+    {
+        playerCollider.enabled = false;
+        rb.constraints = RigidbodyConstraints2D.FreezeAll;
+        if (anim != null)
+            anim.SetTrigger("Die");
+    }
+
+    public float getDeathDuration() 
+    {
+        return deathDuration;
     }
 }

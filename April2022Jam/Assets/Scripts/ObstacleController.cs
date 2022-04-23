@@ -2,15 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DoorController : MonoBehaviour
+public class ObstacleController : MonoBehaviour
 {
-    [SerializeField] Animator anim;
-
+    PlayerMovement player;
     LevelLoader loader;
 
     // Start is called before the first frame update
     void Start()
     {
+        player = FindObjectOfType<PlayerMovement>();
         loader = FindObjectOfType<LevelLoader>();
     }
 
@@ -18,9 +18,8 @@ public class DoorController : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            if (anim != null)
-                anim.SetTrigger("OpenDoor");
-            loader.LoadNextLevel();
+            player.Die();
+            loader.DelayLoadLevelWithName(loader.getSceneName(), player.getDeathDuration());
         }
     }
 }
