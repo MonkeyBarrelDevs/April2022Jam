@@ -4,33 +4,61 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [SerializeField] GameObject playerModel;
+    [SerializeField] float moveSpeed = 5f;
+    
     [SerializeField] float jumpForce = 5f;
     [SerializeField] float gravityScale = 1f;
     [SerializeField] float jumpTimer = 0.5f;
 
+    [SerializeField] LayerMask groundLayer;
+    [SerializeField] Transform groundCheckTransform;
+    [SerializeField] float groundCheckRadius = .4f;
+
+    float moveDirection = 0f;
+
     bool pressedJump = false;
     bool releasedJump = false;
+    bool heldJump = false;
     bool startTimer = false;
     float timer;
+
+    bool isGrounded = false; 
+
     Rigidbody2D rb;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        rb.gravityScale = gravityScale;
 
         timer = jumpTimer;
     }
 
     void Update()
     {
-        if (Input.GetButtonDown("Jump")) 
+        GroundCheck();
+
+        #region Move
+        if (isGrounded) 
+        {
+            moveDirection = moveSpeed * Input.GetAxisRaw("Horizontal");
+        }
+        rb.velocity = new Vector2(moveDirection, rb.velocity.y);
+        #endregion
+
+        #region Jump
+        if (Input.GetButtonDown("Jump") && (heldJump || isGrounded))
         {
             pressedJump = true;
+            heldJump = true;
+            
         }
 
         if (Input.GetButtonUp("Jump")) 
         {
             releasedJump = true;
+            heldJump = false;
         }
 
         if (startTimer) 
@@ -41,6 +69,7 @@ public class PlayerMovement : MonoBehaviour
                 releasedJump = true;
             }
         }
+        #endregion
     }
 
     void FixedUpdate()
@@ -70,5 +99,11 @@ public class PlayerMovement : MonoBehaviour
         releasedJump = false;
         timer = jumpTimer;
         startTimer = false;
+    }
+
+    void GroundCheck() 
+    {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(groundCheckTransform.position, groundCheckRadius, groundLayer);
+        isGrounded = colliders.Length > 0;
     }
 }
