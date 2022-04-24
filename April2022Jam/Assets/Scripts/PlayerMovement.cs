@@ -29,6 +29,7 @@ public class PlayerMovement : MonoBehaviour
 
     Rigidbody2D rb;
     Collider2D playerCollider;
+    PlayerAnimController animController;
 
     AudioManager audioManager;
 
@@ -39,6 +40,7 @@ public class PlayerMovement : MonoBehaviour
         playerCollider = GetComponent<Collider2D>();
         timer = jumpTimer;
         audioManager = GetComponent<AudioManager>();
+        animController = GetComponent<PlayerAnimController>();
     }
 
     void Update()
@@ -128,8 +130,9 @@ public class PlayerMovement : MonoBehaviour
 
     public void Die()
     {
-        playerCollider.enabled = false;
-        rb.constraints = RigidbodyConstraints2D.FreezeAll;
+        //playerCollider.enabled = false;
+        animController.Die();
+        //rb.constraints = RigidbodyConstraints2D.FreezeAll;
     }
 
     public float getDeathDuration()

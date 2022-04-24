@@ -4,13 +4,11 @@ using UnityEngine;
 
 public class ObstacleController : MonoBehaviour
 {
-    PlayerMovement player;
     LevelLoader loader;
 
     // Start is called before the first frame update
     void Start()
     {
-        player = FindObjectOfType<PlayerMovement>();
         loader = FindObjectOfType<LevelLoader>();
     }
 
@@ -18,6 +16,7 @@ public class ObstacleController : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
+            PlayerMovement player = collision.gameObject.GetComponent<PlayerMovement>();
             player.Die();
             loader.DelayLoadLevelWithName(loader.getSceneName(), player.getDeathDuration());
         }

@@ -4,6 +4,7 @@ using UnityEngine.Audio;
 
 public class AudioManager : MonoBehaviour
 {
+    [SerializeField] bool destroyOnLoad;
     public Sound[] sounds;
 
     public static AudioManager instance;
@@ -18,7 +19,8 @@ public class AudioManager : MonoBehaviour
             return;
         }
 
-        DontDestroyOnLoad(gameObject);
+        if (!destroyOnLoad)
+            DontDestroyOnLoad(gameObject);
 
         foreach (Sound s in sounds)
         {

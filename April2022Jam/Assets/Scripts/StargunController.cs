@@ -14,6 +14,12 @@ public class StargunController : MonoBehaviour
     [SerializeField] Rigidbody2D rb;
     private Vector2 mousePosition;
     private string[] soundNames;
+    PlayerAnimController animController;
+
+    private void Awake()
+    {
+        animController = GetComponent<PlayerAnimController>();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -39,6 +45,7 @@ public class StargunController : MonoBehaviour
         if (ammo > 0)
         {
             GetComponent<AudioManager>().PlayRandom(soundNames);
+            animController.Fire();
             Instantiate(prefab, firePoint.position, firePoint.rotation);
             Vector2 position2D = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y);
             Vector2 gunVector = (position2D - mousePosition).normalized;
