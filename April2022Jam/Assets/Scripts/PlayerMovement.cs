@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] float deathDuration = 1f;
+    [SerializeField] string[] deathSoundNames;
 
     [SerializeField] float moveSpeed = 5f;
     [SerializeField] float airMoveSpeed = 1;
@@ -130,9 +131,10 @@ public class PlayerMovement : MonoBehaviour
 
     public void Die()
     {
-        //playerCollider.enabled = false;
+        audioManager.PlayRandom(deathSoundNames);
+        playerCollider.enabled = false;
         animController.Die();
-        //rb.constraints = RigidbodyConstraints2D.FreezeAll;
+        rb.constraints = RigidbodyConstraints2D.FreezeAll;
     }
 
     public float getDeathDuration()

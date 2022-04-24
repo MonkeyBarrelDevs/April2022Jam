@@ -61,7 +61,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4970572970029953113}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -104,6 +104,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathDuration: 1
+  deathSoundNames:
+  - Die1
+  - Die2
+  - Die3
+  - Die4
   moveSpeed: 8
   airMoveSpeed: 1
   jumpForce: 12
@@ -205,6 +210,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 228d41e526d014244b12f6affc5068ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  destroyOnLoad: 1
   sounds:
   - name: Cannon1
     clip: {fileID: 8300000, guid: 6e2433d51cbdf9d4c936de9da351ce50, type: 3}
@@ -240,6 +246,38 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Jump
     clip: {fileID: 8300000, guid: 6a8334911fdc8a84cacf4ca0cb53c087, type: 3}
+    volume: 1
+    pitch: 1
+    SpatialBlend: 0
+    MaxDistance: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Die1
+    clip: {fileID: 8300000, guid: b76d9f8e9e9746943a9341c169914830, type: 3}
+    volume: 1
+    pitch: 1
+    SpatialBlend: 0
+    MaxDistance: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Die2
+    clip: {fileID: 8300000, guid: be06823fd63535343927e3d62957a07f, type: 3}
+    volume: 1
+    pitch: 1
+    SpatialBlend: 0
+    MaxDistance: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Die3
+    clip: {fileID: 8300000, guid: 1eec8120406968b49bfc4e51bafee4c3, type: 3}
+    volume: 1
+    pitch: 1
+    SpatialBlend: 0
+    MaxDistance: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Die4
+    clip: {fileID: 8300000, guid: cae545a0789162b4f91a230ced474b39, type: 3}
     volume: 1
     pitch: 1
     SpatialBlend: 0
