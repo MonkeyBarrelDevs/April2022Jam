@@ -41,4 +41,9 @@ public class StargunController : MonoBehaviour
     {
         ammo++;
     }
+
+    public int getAmmo()
+    {
+        return ammo;
+    }
 }
