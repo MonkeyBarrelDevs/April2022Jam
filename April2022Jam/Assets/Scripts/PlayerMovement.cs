@@ -27,6 +27,7 @@ public class PlayerMovement : MonoBehaviour
     float timer;
 
     bool isGrounded = false;
+    bool isDead = false;
 
     Rigidbody2D rb;
     Collider2D playerCollider;
@@ -49,24 +50,28 @@ public class PlayerMovement : MonoBehaviour
         GroundCheck();
 
         #region Move
-        if (isGrounded)
+        if (!isDead)
         {
-            moveDirection = moveSpeed * Input.GetAxisRaw("Horizontal");
-            rb.velocity = new Vector2(moveDirection, rb.velocity.y);
-            if (Mathf.Abs(Input.GetAxisRaw("Horizontal")) > 0)
+            if (isGrounded)
             {
-                if (!audioManager.isPlaying("Footsies"))
-                    audioManager.Play("Footsies");
+                moveDirection = moveSpeed * Input.GetAxisRaw("Horizontal");
+                rb.velocity = new Vector2(moveDirection, rb.velocity.y);
+                if (Mathf.Abs(Input.GetAxisRaw("Horizontal")) > 0)
+                {
+                    if (!audioManager.isPlaying("Footsies"))
+                        audioManager.Play("Footsies");
+                }
+                else
+                    audioManager.Stop("Footsies");
             }
             else
+            {
                 audioManager.Stop("Footsies");
+                rb.AddForce(airMoveSpeed * Input.GetAxisRaw("Horizontal") * Vector2.right);
+            }
         }
-        else
-        {
+        else 
             audioManager.Stop("Footsies");
-            rb.AddForce(airMoveSpeed * Input.GetAxisRaw("Horizontal") * Vector2.right);
-        }
-
         #endregion
 
         #region Jump
@@ -131,10 +136,12 @@ public class PlayerMovement : MonoBehaviour
 
     public void Die()
     {
-        audioManager.PlayRandom(deathSoundNames);
+        isDead = true;
         playerCollider.enabled = false;
-        animController.Die();
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
+        rb.velocity = Vector2.zero;
+        audioManager.PlayRandom(deathSoundNames);
+        animController.Die();
     }
 
     public float getDeathDuration()

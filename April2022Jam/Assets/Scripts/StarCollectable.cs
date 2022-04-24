@@ -14,7 +14,8 @@ public class StarCollectable : MonoBehaviour
     {
         if(col.gameObject.tag == "Player")
         {
-            manager.PlayOneShot("StarPickup");
+            if (manager != null)
+                manager.PlayOneShot("StarPickup");
             col.gameObject.GetComponent<StargunController>().increaseAmmo();
             Destroy(this.gameObject);
         }

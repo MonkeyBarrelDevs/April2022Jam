@@ -53,12 +53,12 @@ public class AudioManager : MonoBehaviour
     public void PlayOneShot(string name)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
-        AudioClip clip = s.clip;
         if (s == null)
         {
             Debug.LogWarning("Sound: " + name + " not found!");
             return;
         }
+        AudioClip clip = s.clip;
         s.source.PlayOneShot(clip);
     }
 
