@@ -4,11 +4,7 @@ using UnityEngine;
 
 public class PlayerAimGun : MonoBehaviour
 {
-    private Transform aimTransform;
-    void Awake()
-    {
-        aimTransform = transform.Find("Aim");
-    }
+    [SerializeField] Transform aimTransform;
 
     // Update is called once per frame
     void Update()
