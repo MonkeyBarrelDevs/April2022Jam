@@ -930,6 +930,30 @@ MonoBehaviour:
     MaxDistance: 0
     loop: 1
     source: {fileID: 0}
+  - name: Rebound1
+    clip: {fileID: 8300000, guid: b1251d3c79d7bb24a8dedf1e99d4271f, type: 3}
+    volume: 1
+    pitch: 1
+    SpatialBlend: 0
+    MaxDistance: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Rebound2
+    clip: {fileID: 8300000, guid: 41bb605cd2a5f114d97c6041613b699d, type: 3}
+    volume: 1
+    pitch: 1
+    SpatialBlend: 0
+    MaxDistance: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Rebound3
+    clip: {fileID: 8300000, guid: 41bb605cd2a5f114d97c6041613b699d, type: 3}
+    volume: 1
+    pitch: 1
+    SpatialBlend: 0
+    MaxDistance: 0
+    loop: 0
+    source: {fileID: 0}
 --- !u!4 &827712566
 Transform:
   m_ObjectHideFlags: 0
