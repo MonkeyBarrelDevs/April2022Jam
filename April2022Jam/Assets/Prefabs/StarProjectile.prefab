@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: -8095848116337955464}
   - component: {fileID: 2214414501188156148}
   - component: {fileID: 5008014548482864862}
+  - component: {fileID: 7268258408605766865}
   m_Layer: 7
   m_Name: StarProjectile
   m_TagString: Untagged
@@ -143,6 +144,18 @@ MonoBehaviour:
   postBounceLinearDrag: 0.9
   postBounceSpeed: 40
   upTrend: 16.666666
+--- !u!114 &7268258408605766865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5429305376889181821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 309a4535542e8a348b32e0b0eaca6bd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6265212027690340605
 GameObject:
   m_ObjectHideFlags: 0
@@ -152,7 +165,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1387792415462221902}
-  - component: {fileID: 6018690947644427859}
   - component: {fileID: 4880484371200027623}
   m_Layer: 8
   m_Name: Collectable
@@ -176,18 +188,6 @@ Transform:
   m_Father: {fileID: 2304706128034196156}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6018690947644427859
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6265212027690340605}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 309a4535542e8a348b32e0b0eaca6bd3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!58 &4880484371200027623
 CircleCollider2D:
   m_ObjectHideFlags: 0

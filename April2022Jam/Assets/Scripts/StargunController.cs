@@ -44,7 +44,8 @@ public class StargunController : MonoBehaviour
     {
         if (ammo > 0)
         {
-            GetComponent<AudioManager>().PlayRandom(soundNames);
+            string soundName = soundNames[UnityEngine.Random.Range(0, soundNames.Length)];
+            GetComponent<AudioManager>().PlayOneShot(soundName);
             animController.Fire();
             Instantiate(prefab, firePoint.position, firePoint.rotation);
             Vector2 position2D = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y);
