@@ -7,7 +7,10 @@ public class StargunController : MonoBehaviour
     [SerializeField] int ammo;
     [SerializeField] GameObject prefab;
     [SerializeField] Transform firePoint;
-    [SerializeField] float recoilForce = 1f;
+    [SerializeField] float yMomentumModifier = 1f;
+    [SerializeField] float xMomentumModifier = 1f;
+    [SerializeField] float yRecoilModifier = 1f;
+    [SerializeField] float xRecoilModifier = 1f;
     [SerializeField] Rigidbody2D rb;
     private Vector2 mousePosition;
 
@@ -33,7 +36,8 @@ public class StargunController : MonoBehaviour
         {
             Instantiate(prefab, firePoint.position, firePoint.rotation);
             Vector2 position2D = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y);
-            rb.velocity += (position2D - mousePosition).normalized * recoilForce;
+            Vector2 gunVector = (position2D - mousePosition).normalized;
+            rb.velocity = new Vector2(rb.velocity.x * xMomentumModifier + gunVector.x * xRecoilModifier, rb.velocity.y * yMomentumModifier + gunVector.y * yRecoilModifier);
             //rb.AddForce((gameObject.transform.position-mousePosition).normalized * recoilForce, ForceMode2D.Impulse);
             ammo--;
         }

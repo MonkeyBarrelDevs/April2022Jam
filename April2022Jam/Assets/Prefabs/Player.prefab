@@ -193,7 +193,10 @@ MonoBehaviour:
   ammo: 1
   prefab: {fileID: 5429305376889181821, guid: 49a61f2ff141bbf41a5ba8fa4365ea38, type: 3}
   firePoint: {fileID: 9176321335094100025}
-  recoilForce: 7
+  yMomentumModifier: 0.8
+  xMomentumModifier: 0.45
+  yRecoilModifier: 7.5
+  xRecoilModifier: 17
   rb: {fileID: 1501405471966481162}
 --- !u!114 &5121479532936394389
 MonoBehaviour:
