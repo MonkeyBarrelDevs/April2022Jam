@@ -11,7 +11,7 @@ public class AudioPlayer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        manager = FindObjectOfType<AudioManager>();
+        manager = GameObject.FindGameObjectWithTag("MainAudioManager").GetComponent<AudioManager>();
         if (play != "")
             manager.Play(play);
         if (stop != "")
