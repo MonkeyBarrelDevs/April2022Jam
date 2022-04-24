@@ -102,7 +102,7 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 0.25
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 100
   m_GravityScale: 0
   m_Material: {fileID: 6200000, guid: 48fdc57d27ea33b4fac3624406e427d4, type: 2}
   m_Interpolate: 0
@@ -138,7 +138,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collectable: {fileID: 6265212027690340605}
-  speed: 20
+  speed: 75
+  postBounceGravityScale: 5
+  postBounceLinearDrag: 0.9
+  postBounceSpeed: 40
+  upTrend: 16.666666
 --- !u!1 &6265212027690340605
 GameObject:
   m_ObjectHideFlags: 0

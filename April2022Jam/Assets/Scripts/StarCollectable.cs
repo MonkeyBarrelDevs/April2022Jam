@@ -4,16 +4,11 @@ using UnityEngine;
 
 public class StarCollectable : MonoBehaviour
 {
-    StargunController stargun;
-    void Start()
-    {
-        stargun = FindObjectOfType<StargunController>();
-    }
     void OnTriggerEnter2D(Collider2D col)
     {
         if(col.gameObject.tag == "Player")
         {
-            stargun.increaseAmmo();
+            col.gameObject.GetComponent<StargunController>().increaseAmmo();
             Destroy(transform.parent.gameObject);
         }
     }

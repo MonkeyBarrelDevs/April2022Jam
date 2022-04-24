@@ -9,7 +9,8 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] GameObject playerModel;
     [SerializeField] float moveSpeed = 5f;
-    
+    [SerializeField] float airMoveSpeed = 1;
+
     [SerializeField] float jumpForce = 5f;
     [SerializeField] float jumpTimer = 0.5f;
 
@@ -26,7 +27,7 @@ public class PlayerMovement : MonoBehaviour
     bool startTimer = false;
     float timer;
 
-    bool isGrounded = false; 
+    bool isGrounded = false;
 
     Rigidbody2D rb;
     Collider2D playerCollider;
@@ -35,7 +36,7 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         gravityScale = rb.gravityScale;
-        playerCollider = GetComponent<Collider2D>(); 
+        playerCollider = GetComponent<Collider2D>();
 
         timer = jumpTimer;
     }
@@ -45,11 +46,16 @@ public class PlayerMovement : MonoBehaviour
         GroundCheck();
 
         #region Move
-        if (isGrounded) 
+        if (isGrounded)
         {
             moveDirection = moveSpeed * Input.GetAxisRaw("Horizontal");
+            rb.velocity = new Vector2(moveDirection, rb.velocity.y);
         }
-        rb.velocity = new Vector2(moveDirection, rb.velocity.y);
+        else
+        {
+            rb.AddForce(airMoveSpeed * Input.GetAxisRaw("Horizontal") * Vector2.right);
+        }
+
         #endregion
 
         #region Jump
@@ -57,19 +63,19 @@ public class PlayerMovement : MonoBehaviour
         {
             pressedJump = true;
             heldJump = true;
-            
+
         }
 
-        if (Input.GetButtonUp("Jump")) 
+        if (Input.GetButtonUp("Jump"))
         {
             releasedJump = true;
             heldJump = false;
         }
 
-        if (startTimer) 
+        if (startTimer)
         {
             timer -= Time.deltaTime;
-            if (timer <= 0) 
+            if (timer <= 0)
             {
                 releasedJump = true;
             }
@@ -79,18 +85,18 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (pressedJump) 
+        if (pressedJump)
         {
             StartJump();
         }
 
-        if (releasedJump) 
+        if (releasedJump)
         {
             StopJump();
         }
     }
 
-    void StartJump() 
+    void StartJump()
     {
         rb.gravityScale = 0;
         rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
@@ -98,7 +104,7 @@ public class PlayerMovement : MonoBehaviour
         startTimer = true;
     }
 
-    void StopJump() 
+    void StopJump()
     {
         rb.gravityScale = gravityScale;
         releasedJump = false;
@@ -106,13 +112,13 @@ public class PlayerMovement : MonoBehaviour
         startTimer = false;
     }
 
-    void GroundCheck() 
+    void GroundCheck()
     {
         Collider2D[] colliders = Physics2D.OverlapCircleAll(groundCheckTransform.position, groundCheckRadius, groundLayer);
         isGrounded = colliders.Length > 0;
     }
 
-    public void Die() 
+    public void Die()
     {
         playerCollider.enabled = false;
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
@@ -120,7 +126,7 @@ public class PlayerMovement : MonoBehaviour
             anim.SetTrigger("Die");
     }
 
-    public float getDeathDuration() 
+    public float getDeathDuration()
     {
         return deathDuration;
     }
