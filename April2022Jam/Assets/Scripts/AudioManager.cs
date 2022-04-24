@@ -6,8 +6,20 @@ public class AudioManager : MonoBehaviour
 {
     public Sound[] sounds;
 
+    public static AudioManager instance;
+
     void Awake()
     {
+        if (instance == null)
+            instance = this;
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        DontDestroyOnLoad(gameObject);
+
         foreach (Sound s in sounds)
         {
             s.source = gameObject.AddComponent<AudioSource>();
@@ -21,7 +33,7 @@ public class AudioManager : MonoBehaviour
             s.source.rolloffMode = AudioRolloffMode.Custom;
         }
     }
-    
+
     //Plays a sound effect using the name of the sound
     //Example: FindObjectOfType<Audio Manager>().Play(“SoundNmae”);
     public void Play(string name)
@@ -47,10 +59,10 @@ public class AudioManager : MonoBehaviour
         s.source.PlayOneShot(clip);
     }
 
-    public void PlayRandom(Sound[] randomSounds)
+    public void PlayRandom(string[] randomSounds)
     {
-        int soundIndex = UnityEngine.Random.Range(0, randomSounds.Length - 1);
-        Sound s = Array.Find(sounds, sound => randomSounds[soundIndex].name == name);
+        string soundName = randomSounds[UnityEngine.Random.Range(0, randomSounds.Length)];
+        Sound s = Array.Find(sounds, sound => sound.name == soundName);
         if (s == null)
         {
             Debug.LogWarning("Sound: " + name + " not found!");

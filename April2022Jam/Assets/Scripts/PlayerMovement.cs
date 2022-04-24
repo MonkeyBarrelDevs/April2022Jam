@@ -4,10 +4,8 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] Animator anim;
     [SerializeField] float deathDuration = 1f;
 
-    [SerializeField] GameObject playerModel;
     [SerializeField] float moveSpeed = 5f;
     [SerializeField] float airMoveSpeed = 1;
 
@@ -32,13 +30,15 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody2D rb;
     Collider2D playerCollider;
 
+    AudioManager audioManager;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         gravityScale = rb.gravityScale;
         playerCollider = GetComponent<Collider2D>();
-
         timer = jumpTimer;
+        audioManager = GetComponent<AudioManager>();
     }
 
     void Update()
@@ -50,9 +50,17 @@ public class PlayerMovement : MonoBehaviour
         {
             moveDirection = moveSpeed * Input.GetAxisRaw("Horizontal");
             rb.velocity = new Vector2(moveDirection, rb.velocity.y);
+            if (Mathf.Abs(Input.GetAxisRaw("Horizontal")) > 0)
+            {
+                if (!audioManager.isPlaying("Footsies"))
+                    audioManager.Play("Footsies");
+            }
+            else
+                audioManager.Stop("Footsies");
         }
         else
         {
+            audioManager.Stop("Footsies");
             rb.AddForce(airMoveSpeed * Input.GetAxisRaw("Horizontal") * Vector2.right);
         }
 
@@ -61,9 +69,9 @@ public class PlayerMovement : MonoBehaviour
         #region Jump
         if (Input.GetButtonDown("Jump") && (heldJump || isGrounded))
         {
+            audioManager.Play("Jump");
             pressedJump = true;
             heldJump = true;
-
         }
 
         if (Input.GetButtonUp("Jump"))
@@ -122,8 +130,6 @@ public class PlayerMovement : MonoBehaviour
     {
         playerCollider.enabled = false;
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
-        if (anim != null)
-            anim.SetTrigger("Die");
     }
 
     public float getDeathDuration()

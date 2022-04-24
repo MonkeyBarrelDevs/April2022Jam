@@ -13,18 +13,22 @@ public class StargunController : MonoBehaviour
     [SerializeField] float xRecoilModifier = 1f;
     [SerializeField] Rigidbody2D rb;
     private Vector2 mousePosition;
+    private string[] soundNames;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        soundNames = new string[3];
+        soundNames[0] = "Cannon1";
+        soundNames[1] = "Cannon2";
+        soundNames[2] = "Cannon3";
     }
 
     // Update is called once per frame
     void Update()
     {
         mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        if(Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
         {
             Shoot();
         }
@@ -32,8 +36,9 @@ public class StargunController : MonoBehaviour
 
     void Shoot()
     {
-        if(ammo > 0)
+        if (ammo > 0)
         {
+            GetComponent<AudioManager>().PlayRandom(soundNames);
             Instantiate(prefab, firePoint.position, firePoint.rotation);
             Vector2 position2D = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y);
             Vector2 gunVector = (position2D - mousePosition).normalized;
