@@ -18,6 +18,7 @@ public class DoorController : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
+            collision.gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
             if (anim != null)
                 anim.SetTrigger("OpenDoor");
             loader.LoadNextLevel();

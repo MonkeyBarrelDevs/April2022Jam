@@ -11,6 +11,7 @@ public class StarProjectile : MonoBehaviour
     [SerializeField] float postBounceLinearDrag = 2f;
     [SerializeField] float postBounceSpeed = 10f;
     [SerializeField] float upTrend = 1f;
+    [SerializeField] GameObject bounceEffect;
     private string[] soundNames;
     private AudioManager manager;
 
@@ -26,16 +27,12 @@ public class StarProjectile : MonoBehaviour
         rb.velocity = transform.right * speed;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     void OnCollisionEnter2D(Collision2D col)
     {
         string soundName = soundNames[UnityEngine.Random.Range(0, soundNames.Length)];
         manager.PlayOneShot(soundName);
+        if (bounceEffect != null)
+            Instantiate(bounceEffect, transform.position, Quaternion.identity);
         collectable.SetActive(true);
         rb.gravityScale = postBounceGravityScale;
         rb.drag = postBounceLinearDrag;
