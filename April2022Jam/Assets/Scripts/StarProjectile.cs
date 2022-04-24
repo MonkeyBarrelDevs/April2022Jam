@@ -5,16 +5,18 @@ using UnityEngine;
 public class StarProjectile : MonoBehaviour
 { 
     Rigidbody2D rb;
-    Collider2D starCollider;
     [SerializeField] GameObject collectable;
-    public float speed = 20f;
+    [SerializeField] float speed = 20f;
+    [SerializeField] float postBounceGravityScale = 1f;
+    [SerializeField] float postBounceLinearDrag = 2f;
+    [SerializeField] float postBounceSpeed = 10f;
+    [SerializeField] float upTrend = 1f;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         rb.velocity = transform.right * speed;
-        starCollider = GetComponent<Collider2D>();
     }
 
     // Update is called once per frame
@@ -26,7 +28,9 @@ public class StarProjectile : MonoBehaviour
     void OnCollisionEnter2D(Collision2D col)
     {
         collectable.SetActive(true);
-        rb.gravityScale = 1;
+        rb.gravityScale = postBounceGravityScale;
+        rb.drag = postBounceLinearDrag;
+        rb.velocity = rb.velocity.normalized * postBounceSpeed + Vector2.up * upTrend;
         Destroy(this);
     }
 }

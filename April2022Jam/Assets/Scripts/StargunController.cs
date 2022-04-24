@@ -9,7 +9,7 @@ public class StargunController : MonoBehaviour
     [SerializeField] Transform firePoint;
     [SerializeField] float recoilForce = 1f;
     [SerializeField] Rigidbody2D rb;
-    private Vector3 mousePosition;
+    private Vector2 mousePosition;
 
     // Start is called before the first frame update
     void Start()
@@ -30,11 +30,13 @@ public class StargunController : MonoBehaviour
     void Shoot()
     {
         if(ammo > 0)
-            {
-                Instantiate(prefab, firePoint.position, firePoint.rotation);
-                rb.AddForce(-mousePosition * recoilForce, ForceMode2D.Impulse);
-                ammo--;
-            }
+        {
+            Instantiate(prefab, firePoint.position, firePoint.rotation);
+            Vector2 position2D = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y);
+            rb.velocity += (position2D - mousePosition).normalized * recoilForce;
+            //rb.AddForce((gameObject.transform.position-mousePosition).normalized * recoilForce, ForceMode2D.Impulse);
+            ammo--;
+        }
     }
 
     public void increaseAmmo()
