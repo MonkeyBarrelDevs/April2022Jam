@@ -307,6 +307,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 836a8b0161461c340b59cfc24b499af5, type: 3}
+--- !u!1 &1144745493 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -1781443605933488915, guid: fd22106c8344dcc4090d4b9fb1f7e88c, type: 3}
+  m_PrefabInstance: {fileID: 1208483521}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1208483521
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1101,6 +1106,18 @@ PrefabInstance:
     - target: {fileID: -2432069835437211617, guid: fd22106c8344dcc4090d4b9fb1f7e88c, type: 3}
       propertyPath: m_Name
       value: Level_0
+      objectReference: {fileID: 0}
+    - target: {fileID: -1362773116294604767, guid: fd22106c8344dcc4090d4b9fb1f7e88c, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1980826695660389889, guid: fd22106c8344dcc4090d4b9fb1f7e88c, type: 3}
+      propertyPath: playerModel
+      value: 
+      objectReference: {fileID: 1144745493}
+    - target: {fileID: 3242640262714075082, guid: fd22106c8344dcc4090d4b9fb1f7e88c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 6087604271243939204, guid: fd22106c8344dcc4090d4b9fb1f7e88c, type: 3}
       propertyPath: m_IsActive
