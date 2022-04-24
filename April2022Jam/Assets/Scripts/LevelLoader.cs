@@ -14,6 +14,7 @@ public class LevelLoader : MonoBehaviour
 
     private void Start()
     {
+        Time.timeScale = 1f;
         if (autoTransition)
         {
             DelayLoadLevelWithName(autoTransTargetScene, autoTransDelay);
@@ -72,7 +73,7 @@ public class LevelLoader : MonoBehaviour
     {
         PlayTransition();
 
-        yield return new WaitForSeconds(transitionDuration);
+        yield return new WaitForSecondsRealtime(transitionDuration);
 
         SceneManager.LoadScene(levelIndex);
     }
@@ -81,7 +82,7 @@ public class LevelLoader : MonoBehaviour
     {
         PlayTransition();
 
-        yield return new WaitForSeconds(transitionDuration);
+        yield return new WaitForSecondsRealtime(transitionDuration);
 
         SceneManager.LoadScene(name);
     }
@@ -90,12 +91,12 @@ public class LevelLoader : MonoBehaviour
     {
         PlayTransition();
 
-        yield return new WaitForSeconds(transitionDuration);
+        yield return new WaitForSecondsRealtime(transitionDuration);
     }
 
     IEnumerator Delay(string name, float delay)
     {
-        yield return new WaitForSeconds(delay);
+        yield return new WaitForSecondsRealtime(delay);
         LoadLevelWithName(name);
     }
 }
