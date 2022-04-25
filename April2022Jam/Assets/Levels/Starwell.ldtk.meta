@@ -26,6 +26,10 @@ ScriptedImporter:
     _asset: {fileID: 5765224339973328508, guid: e96201210049d4c4fb89905bdc5c0298, type: 3}
   - _key: Star
     _asset: {fileID: 3161119133116395626, guid: 4007c1febe239e24e936b274cbc7923d, type: 3}
+  - _key: Stompy_Boi
+    _asset: {fileID: 1467870050374326151, guid: da8433032467bca4fb41c0a00d73e203, type: 3}
+  - _key: Breaky_Boi
+    _asset: {fileID: 7033763467945594248, guid: dea46a103dcf65640abea54af88d440d, type: 3}
   _enumGenerate: 0
   _enumPath: 
   _enumNamespace: 

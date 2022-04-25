@@ -4,21 +4,29 @@ using UnityEngine;
 
 public class FallingPlatform : MonoBehaviour
 {
-    [SerializeField] float detectDistance = 10f;
+    [SerializeField] float detectDistance = 100f;
 
-    // Start is called before the first frame update
-    void Start()
+    bool dropped = false;
+    Rigidbody2D rb;
+
+    private void Awake()
     {
-        
+        rb = gameObject.GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        RaycastHit2D hit = Physics2D.Raycast(this.gameObject.transform.position, Vector2.down, detectDistance, LayerMask.GetMask("Player"));
+        RaycastHit2D hit = Physics2D.Raycast(gameObject.transform.position, Vector2.down, detectDistance, LayerMask.GetMask("Player"));
         if(hit)
         {
-            this.gameObject.GetComponent<Rigidbody2D>().gravityScale = 1;
+            Debug.Log("Hit");
+            rb.constraints &= ~RigidbodyConstraints2D.FreezePositionY;
+            if (!dropped) 
+            {
+                dropped = true;
+                rb.velocity += Vector2.down * .0001f;
+            }
         }
     }
 }

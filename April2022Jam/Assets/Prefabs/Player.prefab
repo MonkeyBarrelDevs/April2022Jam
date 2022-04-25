@@ -130,13 +130,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3476fa5468765754ab8726ddf9fa805b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ammo: 10
+  ammo: 1
   prefab: {fileID: 5429305376889181821, guid: 49a61f2ff141bbf41a5ba8fa4365ea38, type: 3}
   firePoint: {fileID: 693434125756999472}
-  yMomentumModifier: 0.8
+  yMomentumModifier: 0.45
   xMomentumModifier: 0.45
-  yRecoilModifier: 7.5
-  xRecoilModifier: 17
+  yRecoilModifier: 20
+  xRecoilModifier: 20
   rb: {fileID: 5377066243793746918}
 --- !u!114 &8024279842308903863
 MonoBehaviour:
@@ -357,7 +357,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_Sprite: {fileID: -1357321800, guid: 0b8f39b15fed0fa429745745a7ea8c0b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -462,7 +462,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 6
   m_Sprite: {fileID: 21300000, guid: 70c708a941c7c494ca27ace5f5f0065f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
