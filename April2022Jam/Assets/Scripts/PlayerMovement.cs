@@ -75,25 +75,28 @@ public class PlayerMovement : MonoBehaviour
         #endregion
 
         #region Jump
-        if (Input.GetButtonDown("Jump") && (heldJump || isGrounded))
+        if (!isDead)
         {
-            audioManager.Play("Jump");
-            pressedJump = true;
-            heldJump = true;
-        }
+            if (Input.GetButtonDown("Jump") && (heldJump || isGrounded))
+            {
+                audioManager.Play("Jump");
+                pressedJump = true;
+                heldJump = true;
+            }
 
-        if (Input.GetButtonUp("Jump"))
-        {
-            releasedJump = true;
-            heldJump = false;
-        }
-
-        if (startTimer)
-        {
-            timer -= Time.deltaTime;
-            if (timer <= 0)
+            if (Input.GetButtonUp("Jump"))
             {
                 releasedJump = true;
+                heldJump = false;
+            }
+
+            if (startTimer)
+            {
+                timer -= Time.deltaTime;
+                if (timer <= 0)
+                {
+                    releasedJump = true;
+                }
             }
         }
         #endregion
@@ -138,6 +141,7 @@ public class PlayerMovement : MonoBehaviour
     {
         isDead = true;
         playerCollider.enabled = false;
+        GetComponent<StargunController>().enabled = false;
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
         rb.velocity = Vector2.zero;
         audioManager.PlayRandom(deathSoundNames);

@@ -50,7 +50,14 @@ public class StargunController : MonoBehaviour
             Instantiate(prefab, firePoint.position, firePoint.rotation);
             Vector2 position2D = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y);
             Vector2 gunVector = (position2D - mousePosition).normalized;
-            rb.velocity = new Vector2(rb.velocity.x * xMomentumModifier + gunVector.x * xRecoilModifier, rb.velocity.y * yMomentumModifier + gunVector.y * yRecoilModifier);
+
+            Vector2 gunForce = new Vector2(gunVector.x * xRecoilModifier, gunVector.y * yRecoilModifier);
+            if (rb.velocity.x * gunVector.x > 0)
+                gunForce.x += rb.velocity.x * xMomentumModifier;
+            if (rb.velocity.y * gunVector.y > 0)
+                gunForce.y += rb.velocity.y * yMomentumModifier;
+
+            rb.velocity = gunForce;
             //rb.AddForce((gameObject.transform.position-mousePosition).normalized * recoilForce, ForceMode2D.Impulse);
             ammo--;
         }
