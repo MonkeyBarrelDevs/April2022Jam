@@ -6,6 +6,8 @@ public class TransitionHandler : MonoBehaviour
 {
     [SerializeField] Animator transition;
 
+    bool transitioning = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -14,7 +16,12 @@ public class TransitionHandler : MonoBehaviour
 
     void StartTransition() 
     {
-        transition.SetTrigger("Start");
+
+        if (!transitioning)
+        {
+            transitioning = true;
+            transition.SetTrigger("Start");
+        }
     }
 
     private void OnDisable()

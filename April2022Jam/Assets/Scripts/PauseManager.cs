@@ -10,6 +10,7 @@ public class PauseManager : MonoBehaviour
 
     private void Start()
     {
+        Time.timeScale = 1f;
         loader = FindObjectOfType<LevelLoader>();
     }
 
@@ -31,6 +32,5 @@ public class PauseManager : MonoBehaviour
     public void ReturnToMenu() 
     {
         loader.LoadLevelWithName("Main Menu");
-        Time.timeScale = 1f;
     }
 }
