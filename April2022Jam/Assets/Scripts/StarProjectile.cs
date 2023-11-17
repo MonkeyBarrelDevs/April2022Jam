@@ -27,16 +27,24 @@ public class StarProjectile : MonoBehaviour
         rb.velocity = transform.right * speed;
     }
 
+    /// <summary>
+    /// Handles changing the star gameobject from its prebounce to postbounce state.
+    /// </summary>
     void OnCollisionEnter2D(Collision2D col)
     {
+        // Trigger the SFX and VFX.
         string soundName = soundNames[UnityEngine.Random.Range(0, soundNames.Length)];
         manager.PlayOneShot(soundName);
         if (bounceEffect != null)
             Instantiate(bounceEffect, transform.position, Quaternion.identity);
+
+        // Sets up the gameobject for postbounce.
         collectable.SetActive(true);
         rb.gravityScale = postBounceGravityScale;
         rb.drag = postBounceLinearDrag;
         rb.velocity = rb.velocity.normalized * postBounceSpeed + Vector2.up * upTrend;
+
+        // This component has served its purpose and can be safely removed.
         Destroy(this);
     }
 }
